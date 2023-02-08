@@ -64,7 +64,7 @@ export default function NFTPage (props) {
     }
      const router = useRouter()
     const { tokenId } = router.query
-        console.log(tokenId,"yo2")
+        // console.log(tokenId,"yo2")
 
         if(!dataFetched)
             getNFTData(tokenId);
