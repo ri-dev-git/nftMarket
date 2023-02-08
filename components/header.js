@@ -22,7 +22,7 @@ export default  function Header({context}) {
          </div>
          <div className="sell">
            
-            <Link href="/sell-nft">
+            <Link href="/sellNFT">
               Sell NFT
             </Link>
          </div>
