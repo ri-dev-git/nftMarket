@@ -13,5 +13,5 @@
 # Redirect everything through Next.js (for dynamic routes like /nft/[address]/[tokenId])
 [[redirects]]
   from   = "/*"
-  to     = "/.netlify/functions/___netlify-handler"
+  to     = "/.netlify/functions/___netlify-server-handler"
   status = 200
