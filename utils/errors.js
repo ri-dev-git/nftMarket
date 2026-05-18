@@ -23,6 +23,8 @@ export function parseContractError(error) {
     if (/user rejected|rejected the request/i.test(msg)) return "Transaction cancelled"
     if (/insufficient funds/i.test(msg)) return "Insufficient funds in your wallet"
     if (/nonce/i.test(msg)) return "Transaction nonce error — try again"
+    if (/not.*owner|caller is not/i.test(msg)) return "You don't own this token"
+    if (/invalid address|is not a valid/i.test(msg)) return "App misconfiguration — marketplace address missing"
 
-    return "Transaction failed — please try again"
+    return `Transaction failed: ${msg.slice(0, 160)}`
 }

@@ -172,10 +172,14 @@ export default function SellNFT() {
     }
 
     function handleApprove() {
+        if (!MARKETPLACE) {
+            alert("NEXT_PUBLIC_MARKETPLACE_ADDRESS is not set — add it to your Netlify environment variables")
+            return
+        }
         resetApprove()
         approve({
             address:      nftAddress,
-            abi:          MintableNftAbi,
+            abi:          ERC721Abi,
             functionName: "approve",
             args:         [MARKETPLACE, BigInt(tokenId)],
         })
