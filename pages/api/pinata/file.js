@@ -24,9 +24,8 @@ export default async function handler(req, res) {
       {
         maxBodyLength: Infinity,
         headers: {
-          "Content-Type":        req.headers["content-type"],
-          pinata_api_key:        process.env.PINATA_API_KEY,
-          pinata_secret_api_key: process.env.PINATA_SECRET,
+          "Content-Type":  req.headers["content-type"],
+          Authorization:   `Bearer ${process.env.PINATA_JWT}`,
         },
       }
     )

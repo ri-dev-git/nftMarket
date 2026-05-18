@@ -15,8 +15,7 @@ export default async function handler(req, res) {
       req.body,
       {
         headers: {
-          pinata_api_key:        process.env.PINATA_API_KEY,
-          pinata_secret_api_key: process.env.PINATA_SECRET,
+          Authorization: `Bearer ${process.env.PINATA_JWT}`,
         },
       }
     )
