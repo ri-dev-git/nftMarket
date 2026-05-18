@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/router'
 import MarketplaceJSON from "../../constants/Marketplace.json";
 export default function NFTPage (props) {
@@ -10,6 +10,7 @@ export default function NFTPage (props) {
     const [currAddress, updateCurrAddress] = useState("0x");
     
     async function getNFTData(tokenId) {
+        if (typeof window === "undefined") return;
         const ethers = require("ethers");
         //After adding your Hardhat network to your metamask, this code will get providers and signers
         const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -42,6 +43,7 @@ export default function NFTPage (props) {
     
     async function buyNFT(tokenId) {
         try {
+            if (typeof window === "undefined") return;
             const ethers = require("ethers");
             //After adding your Hardhat network to your metamask, this code will get providers and signers
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -62,12 +64,15 @@ export default function NFTPage (props) {
             alert("Upload Error"+e)
         }
     }
-     const router = useRouter()
-    const { tokenId } = router.query
-        // console.log(tokenId,"yo2")
 
-        if(!dataFetched)
+    const router = useRouter()
+    const { tokenId } = router.query
+    
+    useEffect(() => {
+        if (!dataFetched && tokenId && typeof window !== "undefined") {
             getNFTData(tokenId);
+        }
+    }, [dataFetched, tokenId]);
     
         return(
             <div style={{"min-height":"100vh"}}>
